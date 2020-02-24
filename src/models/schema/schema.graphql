@@ -25,8 +25,17 @@ type Portfolio {
 	hobbies: String
 }
 
+type User {
+	_id: ID!
+	firstName: String!
+	lastName: String!
+	email: String!
+	password: String!
+}
+
 type Query {
-	hello: String
 	getPortfolios: [Portfolio]
 	getPortfolio(id: ID!): Portfolio
+	getUsers: [User]
+	getUser(id: ID!): [User]
 }

@@ -8,6 +8,10 @@ import apiRoutes from './routes/index';
 import enforce from 'express-sslify';
 import helmet from 'helmet';
 import notFound from '../src/middleware/notFoundHandler';
+import path from 'path';
+import { readFileSync } from 'fs';
+import { makeExecutableSchema } from 'graphql-tools';
+import resolvers from './resolvers';
 
 (async () => {
 	try {
@@ -22,7 +26,7 @@ import notFound from '../src/middleware/notFoundHandler';
 			app.use(
 				enforce.HTTPS({
 					trustProtoHeader: true,
-				}),
+				})
 			);
 			app.use(helmet());
 			app.disable('x-powered-by');
@@ -38,8 +42,17 @@ import notFound from '../src/middleware/notFoundHandler';
 			useFindAndModify: false,
 		});
 
-		apiRoutes.userRoutes(app, config.base_url);
-		apiRoutes.portfolioRoutes(app, config.base_url);
+		const typeDefs = readFileSync(
+			path.resolve('src/models/schema/schema.graphql'),
+			'utf-8'
+		);
+		const schema = makeExecutableSchema({
+			typeDefs,
+			resolvers,
+		});
+
+		apiRoutes.userRoutes(app, config.base_url, schema);
+		apiRoutes.portfolioRoutes(app, config.base_url, schema);
 
 		app.use(notFound);
 		app.listen(config.port, () => {
