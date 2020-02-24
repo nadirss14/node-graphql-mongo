@@ -1,0 +1,47 @@
+{
+	"name": "express-graphql-mongo",
+	"version": "1.0.0",
+	"description": "Api para consumo de BD en MongoDB utilizando GraphQL",
+	"main": "index.js",
+	"scripts": {
+		"build": "webpack",
+		"play": "webpack --watch | nodemon dist/server.bundle.js",
+		"start": "node dist/server.bundle.js"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "MIT",
+	"devDependencies": {
+		"@babel/core": "^7.8.4",
+		"@babel/preset-env": "^7.8.4",
+		"babel-loader": "^8.0.6",
+		"eslint": "^6.8.0",
+		"eslint-plugin-import": "^2.20.1",
+		"nodemon": "^2.0.2",
+		"webpack": "^4.41.6",
+		"webpack-cli": "^3.3.11",
+		"webpack-node-externals": "^1.7.2"
+	},
+	"dependencies": {
+		"@babel/polyfill": "^7.8.3",
+		"@hapi/boom": "^9.0.0",
+		"@hapi/joi": "^17.1.0",
+		"bcryptjs": "^2.4.3",
+		"body-parser": "^1.19.0",
+		"cors": "^2.8.5",
+		"dotenv": "^8.2.0",
+		"express": "^4.17.1",
+		"express-graphql": "^0.9.0",
+		"express-sslify": "^1.2.0",
+		"graphql": "^14.6.0",
+		"graphql-tools": "^4.0.7",
+		"helmet": "^3.21.2",
+		"jsonwebtoken": "^8.5.1",
+		"mongoose": "5.7.3",
+		"multer": "^1.4.2",
+		"passport": "^0.4.1",
+		"passport-http": "^0.3.0",
+		"passport-jwt": "^4.0.0",
+		"passport-local": "^1.0.0"
+	}
+}

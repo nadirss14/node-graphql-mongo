@@ -1,0 +1,32 @@
+type Email {
+	gmail: String
+	yahoo: String
+}
+type SocialMedia {
+	name: String!
+	url: String!
+}
+
+type Portfolio {
+	_id: ID!
+	version: String!
+	name: String!
+	lastName: String!
+	country: String!
+	city: String!
+	birthdate: String!
+	gender: String!
+	profecion: String
+	occupation: String
+	email: [Email]
+	socialMedia: [SocialMedia]
+	site: String
+	about: String
+	hobbies: String
+}
+
+type Query {
+	hello: String
+	getPortfolios: [Portfolio]
+	getPortfolio(id: ID!): Portfolio
+}

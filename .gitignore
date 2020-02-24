@@ -1,0 +1,8 @@
+node_modules
+.env
+.vscode/settings.json
+/uploadstemp
+.idea
+/.idea
+package-lock.json
+server.bundle.js
