@@ -11,6 +11,7 @@ import notFound from '../src/middleware/notFoundHandler';
 import path from 'path';
 import { readFileSync } from 'fs';
 import { makeExecutableSchema } from 'graphql-tools';
+import gqlMiddleware from 'express-graphql';
 import resolvers from './resolvers';
 
 (async () => {
@@ -46,13 +47,19 @@ import resolvers from './resolvers';
 			path.resolve('src/models/schema/schema.graphql'),
 			'utf-8'
 		);
-		const schema = makeExecutableSchema({
-			typeDefs,
-			resolvers,
-		});
+		const schema = makeExecutableSchema({ typeDefs, resolvers });
 
-		apiRoutes.userRoutes(app, config.base_url, schema);
-		apiRoutes.portfolioRoutes(app, config.base_url, schema);
+		app.use(
+			'/api',
+			gqlMiddleware({
+				schema: schema,
+				rootValue: resolvers,
+				graphiql: true,
+			})
+		);
+
+		// apiRoutes.userRoutes(app, config.base_url, schema);
+		// apiRoutes.portfolioRoutes(app, config.base_url, schema);
 
 		app.use(notFound);
 		app.listen(config.port, () => {

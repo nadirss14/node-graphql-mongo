@@ -1,6 +1,6 @@
 type Email {
-	gmail: String
-	yahoo: String
+	provider: String!
+	email: String!
 }
 type SocialMedia {
 	name: String!
@@ -16,7 +16,7 @@ type Portfolio {
 	city: String!
 	birthdate: String!
 	gender: String!
-	profecion: String
+	profession: String
 	occupation: String
 	email: [Email]
 	socialMedia: [SocialMedia]
@@ -37,5 +37,61 @@ type Query {
 	getPortfolios: [Portfolio]
 	getPortfolio(id: ID!): Portfolio
 	getUsers: [User]
-	getUser(id: ID!): [User]
+	getUser(id: ID!): User
+}
+
+input PortfolioInput {
+	version: String!
+	name: String!
+	lastName: String!
+	country: String!
+	city: String!
+	birthdate: String
+	gender: String!
+	profession: String
+	occupation: String
+	email: [EmailInput]
+	socialMedia: [SocialMediaInput]
+	site: String
+	about: String
+	hobbies: String
+}
+
+input EmailInput {
+	provider: String!
+	email: String!
+}
+input SocialMediaInput {
+	name: String!
+	url: String!
+}
+
+input PortfolioUpdate {
+	name: String
+	lastName: String
+	country: String
+	city: String
+	birthdate: String
+	gender: String
+	profession: String
+	occupation: String
+	email: [EmailUpdate]
+	socialMedia: [SocialMediaUpdate]
+	site: String
+	about: String
+	hobbies: String
+}
+
+input EmailUpdate {
+	provider: String!
+	email: String!
+}
+input SocialMediaUpdate {
+	name: String!
+	url: String!
+}
+
+type Mutation {
+	createPortfolio(input: PortfolioInput!): Portfolio
+	updatePortfolio(_id: ID!, input: PortfolioUpdate): Portfolio
 }
